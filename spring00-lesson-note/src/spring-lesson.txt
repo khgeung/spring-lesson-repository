@@ -213,7 +213,6 @@ XML + Annotation 조합 또는 Annotation + Java Config 또는 XML + Annotation 
    INFO
    DEBUG
    TRACE
-   
 
 
 
