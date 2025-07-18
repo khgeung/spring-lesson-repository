@@ -1,8 +1,16 @@
 package org.kosa.myproject.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.kosa.myproject.domain.Member;
 
 @Mapper
 public interface MemberMapper {
 	int getTotalMemberCount();
+	int register(Member member);
+	Member findMemberById(String string);
+	List<Member> findAllMemberList();
+	int updateMember(Member paramVo);
+	int deleteMember(String id);
 }
