@@ -10,7 +10,7 @@
 	<select id="findAllProductList" resultType="org.kosa.myproject.domain.Product">
 		select <include refid="productColumns"></include> from spring_product;
 	</select>
-	<select id="findAllProductById" parameterType="long" resultType="org.kosa.myproject.domain.Product">
+	<select id="findProductById" parameterType="long" resultType="org.kosa.myproject.domain.Product">
 		select <include refid="productColumns"></include> from spring_product where product_id=#{productId};
 	</select>
 	<update id="updateProduct" parameterType="org.kosa.myproject.domain.Product" >
@@ -29,4 +29,58 @@
 	
 	</select>
 	
+	<!--  
+			MyBatis Dynamic SQL study
+			
+			parameterType : 타입 추론하여 생략 가능 (map, vo/dto/domain, string 등 생략가능)
+							만약 컬렉션 계열은 타입 명시하는 것도 좋다
+	 -->
+	
+	<select id="findProductsDynamic" parameterType="map" resultType="org.kosa.myproject.domain.Product">
+	
+	<!-- 
+	select <include refid="productColumns"></include> from spring_product where maker=#{maker}
+	 -->	
+	 
+	select <include refid="productColumns"></include> from spring_product 
+	<where>
+	
+	<if test="maker != null and maker !=''">
+	AND maker = #{maker}
+	</if>
+	
+	<if test="productName != null and productName !=''">
+	AND product_name LIKE CONCAT('%',#{productName},'%') 
+	</if>
+	
+	<if test="minPrice != null and maxPrice !=null and minPrice !='' and maxPrice !='' ">
+	AND price BETWEEN #{minPrice} AND #{maxPrice}
+	</if>
+  
+	<if test="searchPrice != null and searchPrice !=''">
+	<![CDATA[ AND price <= #{searchPrice} ]]>
+	</if>
+
+	</where>
+	ORDER BY created_at DESC 
+	</select>
+	
+	<!-- Dynamic SQL update 연습 -->
+	<update id="updateProductDynamic">
+	UPDATE spring_product
+	<set>
+		<if test="maker !=null and maker !='' ">
+		maker = #{maker},
+		</if>
+		<if test="productName != null and productName!=''">
+			product_name=#{productName},
+		</if>
+		<if test="price!=null and price !='' ">
+			price = #{price}, 
+		</if>
+	</set>
+	WHERE product_id = #{productId}
+	</update>
+	
+
 </mapper>
