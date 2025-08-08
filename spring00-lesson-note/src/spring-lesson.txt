@@ -326,6 +326,62 @@ AOP Proxy가 트랜잭션 시작, 커밋(commit), 롤백(rollback)과 같은 기
 						  class PersonNotFoundException extends RuntimeException{}
 
 
+ ***AJAX (Asynchronus Javascript And Xml)***  
+   			비동기 자바스크립트 통신 
+   			
+   			***페이지 리로딩 없는 부분 업데이트***
+   			요청에 대한 응답을 웹 페이지가 아니라 필요한 데이터(text or xml or json)로 응답받는다
+   			==> 필요데이터로 응답받아 화면에 부분 업데이트 		    
+      	 
+      	**비동기 요청 후 작업 지속**
+      	서버에 요청을 보낸 후 응답을 기다리는 동안에도 사용자는 페이지의 다른 버튼을 누르거나 화면을 스크롤하는 등 다른 작업을 계속할 수 있습니다. 이는 사용성 측면에서 매우 중요
+     	  
+   XML 과 JSON : Ajax 통신시 사용하는 데이터 형식
+				    	  구조화된 데이터 송수신을 위해 xml과 json을 이용한다 
+			          2005년 이후 초기에는 xml 을 이용했으나 최근에는  json 을 이용한다 
+			          
+   JSON : JavaScript Object Notation  
+            자바스크립트 객체 표기법
+            Ajax 통신시 구조화된 데이터를 송수신하는 용도로 사용된다 
+            경량이고 높은 생산성이 장점 
+            
+   Ajax 방식 세가지
+   XmlHttpRequest 
+   jQuery 
+   fetch      
+
+Fetch API : 자바스크립트의 표준 비동기 통신 API
+
+비동기 웹 개발의 두 가지 핵심 개념
+fetch와 async/await
+
+fetch: 네트워크 요청을 보내는 기능
+async/await: 그 요청의 응답을 다루는 방법
+
+
+fetch 의 역할 
+fetch는 Promise를 반환합니다.
+fetch('URL') 함수를 호출하면, 네트워크 요청이 즉시 시작됩니다. 
+이 함수는 요청이 완료될 때까지 기다리지 않고, 
+대신 Promise라는 특별한 객체를 즉시 반환합니다. 
+이 Promise는 "나중에 응답이 도착하면 성공 또는 실패 정보를 알려줄게"라고 
+약속하는 역할을 합니다.
+
+async 의 역할 
+async 함수는 Promise를 기다릴 수 있습니다.
+async 키워드가 붙은 함수 안에서만 await를 사용할 수 있습니다. 
+이 async 함수는 Promise가 완료될 때까지 자신의 실행을 일시 중지하는 능력을 갖게 됩니다.
+
+await 의 역할 
+await가 fetch의 Promise를 기다립니다.
+const response = await fetch('URL'); 코드를 보면, 
+await는 fetch가 반환한 Promise가 완료될 때까지 기다립니다. 
+하지만 이때, JavaScript의 메인 스레드는 멈추지 않습니다. 
+asyn 함수 외의 다른 코드들이 계속 실행될 수 있게 해주어 비동기 작업이 가능하게 됩니다 
+서버로부터 응답이 도착하면, fetch가 반환했던 Promise가 '완료' 상태가 됩니다. 
+그러면 await는 const response에 응답 결과를 할당한 뒤 
+async 함수의 다음 코드 라인을 실행하게 됩니다.
+
 
 
 
