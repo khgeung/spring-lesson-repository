@@ -59,7 +59,7 @@ async function startAjax() {
 	}
 }
 
-cconsole.log("다른 작업 진행...");
+console.log("다른 작업 진행...");
 
 
 
